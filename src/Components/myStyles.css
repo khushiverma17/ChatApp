@@ -1,0 +1,105 @@
+.main-container{
+    background-color: rgb(232, 234, 234);
+    height: 90vh;
+    width: 90vw;
+    display: flex;
+    border-radius: 20px;
+    
+}
+.sidebar-container{
+    /* background-color: yellow; */
+    /* border: 2px solid brown; */
+    flex: 0.3;
+    display: flex;
+    flex-direction: column;
+}
+.ChatArea-container{
+    flex: 0.7;
+}
+.sb-header{
+    background-color: white;
+    border-radius: 20px;
+    padding: 10px 5px;
+    margin: 5px;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+.sb-search{
+    background-color: white;
+    border-radius: 20px;
+    padding: 5px 10px;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+}
+.search-box{
+    outline-width: 0;
+    border: none;
+    font-size: 1.25rem;
+    margin-left: 10px;
+}
+.sb-conversations{
+    background-color: white;
+    border-radius: 20px;
+    padding: 5px 10px;
+    margin: 5px;
+    flex: 1;
+}
+.conversation-container{
+    display: grid;
+    grid-template-columns: 32px auto auto;
+    grid-template-rows: auto auto;
+    column-gap: 10px;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 20px;
+}
+
+.con-icon{
+    grid-area: 1/1/3/2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #d9d9d9;
+    font-size: 2rem;
+    font-weight: bolder;
+    color: white;
+    height: 32px;
+    width: 32px;
+    padding: 2px;
+    border-radius: 50%;
+    justify-content: cen;
+    align-items: center;
+}
+.con-title{
+    grid-area: 1/2/2/4;
+    font-weight: bold;
+    color: rgba(0,0,0,0.54);
+}
+
+.con-timeStamp{
+    justify-self: flex-end;
+    font-size: 0.75rem;
+    color: black;
+}
+.con-lastMessage{
+    font-size: 0.75rem;
+}
+.ChatArea-container{
+    display: flex;
+    flex-direction: column;
+
+}
+.chatArea-header{
+    background-color: orange;
+    height: 20px;
+}
+.messages-container{
+    background-color: aquamarine;
+    flex: 1;
+}
+.text-input-area{
+    background-color: yellow;
+    height: 20px;
+}
