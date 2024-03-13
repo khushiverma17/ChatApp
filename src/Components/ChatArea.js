@@ -29,6 +29,12 @@ function ChatArea({props}){
             <div className="messages-container">
                 <MessageOthers/>
                 <MessageSelf/>
+                <MessageOthers/>
+                <MessageSelf/>
+                <MessageOthers/>
+                <MessageSelf/>
+                <MessageOthers/>
+                <MessageSelf/>
 
 
 

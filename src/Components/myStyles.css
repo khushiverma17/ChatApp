@@ -70,8 +70,9 @@
     width: 32px;
     padding: 2px;
     border-radius: 50%;
-    justify-content: cen;
-    align-items: center;
+    justify-self: center;
+    align-self: center;
+    margin-right: 5px;
 }
 .con-title{
     grid-area: 1/2/2/4;
@@ -79,13 +80,19 @@
     color: rgba(0,0,0,0.54);
 }
 
-.con-timeStamp{
+.self-timeStamp{
     justify-self: flex-end;
     font-size: 0.75rem;
     color: black;
 }
-.con-lastMessage{
+.self-time-stamp{
+    align-self: flex-end;
+    margin-top: 6px;
+    font-size: 12px;
+}
+.con-last-message{
     font-size: 0.75rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .ChatArea-container{
     display: flex;
@@ -112,6 +119,7 @@
     background-color: white;
     border-radius: 20px;
     flex: 1;
+    overflow: scroll;
 }
 .text-input-area{
     background-color: white;
@@ -123,8 +131,17 @@
     justify-content: space-between;
     /* background-color: #d9d9d9; */
 }
-.other-message-container{
+.other-text-content{
     background-color: #d9d9d9;
+    padding: 10px 10px;
+    margin: 5px;
+    border-radius: 20px;
+    width: max-content;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.other-message-container{
     padding: 10px 10px;
     margin: 5px;
     border-radius: 20px;
@@ -137,16 +154,25 @@
 }
 .messageBox{
     display: flex;
+    flex-direction: column;
     background-color: pink;
     width: max-content;
     padding: 10px 10px;
     margin: 5px;
     border-radius: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .self-timeStamp{
     align-self: flex-end;
-    font-size: 0.75rem;
+    font-size: 11px;
     font-weight: lighter;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: 6px;
+}
+.con-title{
+    grid-area: 1/2/2/4;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    color: black;
 }
 
