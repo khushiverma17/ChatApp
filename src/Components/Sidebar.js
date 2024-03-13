@@ -68,10 +68,6 @@ function Sidebar(){
                     return <ConversationsItem props={conversation} key={conversation.Name}/>
                 })}
             </div>
-
-
-
-
         </div>
     )
 }
