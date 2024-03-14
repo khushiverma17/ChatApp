@@ -45,7 +45,11 @@
     border-radius: 20px;
     padding: 5px 10px;
     margin: 5px;
+    overflow: scroll;
     flex: 1;
+}
+.sb-conversations::-webkit-scrollbar{
+    display: none;
 }
 .conversation-container{
     display: grid;
@@ -121,6 +125,9 @@
     flex: 1;
     overflow: scroll;
 }
+.messages-container::-webkit-scrollbar{
+    display: none;
+}
 .text-input-area{
     background-color: white;
     height: 20px;
@@ -159,6 +166,7 @@
     width: max-content;
     padding: 10px 10px;
     margin: 5px;
+    margin-right: 18px;
     border-radius: 20px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -176,3 +184,49 @@
     color: black;
 }
 
+.welcome-logo{
+    height: 20vw;
+}
+.welcome-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 0.7;
+    gap: 20px;
+    color: rgba(0,0,0,0.54);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-bottom: 5px solid rgb(204, 141, 221);
+    border-radius: 20px;
+}
+.welcome-para{
+    font-size: 30px;
+    font-weight: 700;
+}
+.login-container{
+    height: 90vh;
+    width: 90vw;
+    background-color: #f4f5f8;
+    border-radius: 20px;
+    display: flex;
+}
+.image-container{
+    flex: 0.3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-box{
+    flex: 0.7;
+    background-color: white;
+    border-radius: 20px;
+    margin: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: antiquewhite;
+    font-weight: bolder;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
