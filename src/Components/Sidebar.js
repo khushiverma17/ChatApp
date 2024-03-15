@@ -11,6 +11,7 @@ import ConversationsItem from "./ConversationsItem";
 import { useNavigate } from "react-router-dom";
 
 function Sidebar(){
+    const navigate=useNavigate();
     const [conversations, setConversations]= useState([
         {
             Name: "Test1",
@@ -30,7 +31,6 @@ function Sidebar(){
     ])
 
     // useNavigate retruns a function
-    const navigate=useNavigate();
 
 
 
