@@ -51,7 +51,7 @@ function Sidebar(){
                     <IconButton onClick={()=>{navigate("./groups")}}>
                         <GroupAddIcon/>
                     </IconButton>
-                    <IconButton onClick={()=>{navigate("./create-groups")}}>
+                    <IconButton onClick={()=>{navigate("./creategroups")}}>
                         <AddCircleIcon/>
                     </IconButton>
                     <IconButton>
