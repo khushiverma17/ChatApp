@@ -4,6 +4,8 @@ import Sidebar from "./Sidebar"
 import ChatArea from "./ChatArea";
 import ConversationsItem from "./ConversationsItem";
 import Welcome from "./Welcome";
+import Groups from "./Groups"
+import CreateGroups from "./CreateGroups";
 import { Outlet } from "react-router-dom";
 
 function MainContainer(){

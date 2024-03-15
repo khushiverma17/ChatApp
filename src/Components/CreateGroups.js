@@ -2,10 +2,10 @@ import React from "react";
 
 function CreateGroups(){
     return(
-        <div className="welcome-container">
-            <img src="{logo}" alt="logo" className="welcome-logo"></img>
-            <p>Just Chatting</p>
-
+        <div className="create-group">
+            <div className="group-name-container">
+                <input className="group-name" placeholder="Enter Group Name"></input>
+            </div>
         </div>
     )
 }
