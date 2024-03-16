@@ -373,6 +373,8 @@
     }
     .ChatArea-container{
         flex: 1;
+
+        background-color: red;
     }
     
 
@@ -384,15 +386,31 @@
         width: 100vw;
         /* gap: 4px; */
     }
-    /* .chatArea-header{
-        margin-left: 0px;
+    .list-container{
+        flex: 1;
     }
-    .messages-container{
-        margin-left: 0px;
+    .create-group{
+        flex: 1;
     }
-    .text-input-area{
-        margin-left: 0px;
-    } */
-
-
+    .image-container{
+        flex: 0.1;
+    }
+    .login-box{
+        flex: 0.9;
+    }
+    .login-to-account{
+        font-size: 16px !important;
+    }
+    #standard-basic{
+        height: 10px !important;
+        width:  100px !important;
+    }
+    #outlined-password-input{
+        height: 10px !important;
+        width:  100px !important;
+    }
+    .login-button{
+        height: 25px;
+        width: 80px;
+    }
 }

@@ -5,6 +5,12 @@ import {BrowserRouter} from "react-router-dom"
 import {store} from "./Features/Store";
 import { Provider } from "react-redux";
 
+// react router dom for routing
+// react redux for theme toggle
+// framer motion for animation
+
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
