@@ -52,12 +52,12 @@ function Sidebar(){
     return(
         <div className="sidebar-container">
             <div className={"sb-header" + ((lightTheme)?"" : " dark")}>
-                <div>
+                <div className="profilePic">
                     <IconButton>
                         <AccountCircleIcon className={"icon" + ((lightTheme)?"" : " dark")}/>
                     </IconButton>
                 </div>
-                <div>
+                <div className="other-items">
                     <IconButton onClick={()=>{navigate("./users")}}>
                         <PersonAddIcon className={"icon" + ((lightTheme)?"" : " dark")}/>
                     </IconButton>

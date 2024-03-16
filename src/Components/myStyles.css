@@ -1,6 +1,8 @@
 .dark{
     background-color: #2d3941 !important;
-    color: whitesmoke !important;
+    /* color: whitesmoke !important; */
+    color: rgb(164, 162, 162) !important;
+
 }
 .icon{
     width: 1.25em !important;
@@ -343,4 +345,54 @@
 .tick{
     justify-self: center;
     margin-bottom: 2px;
+}
+
+.other-items{
+    display: flex;
+    flex: 1;
+    justify-content: space-evenly;
+}
+@media only screen and (max-width: 40em)
+{
+    .sb-search{
+        display: none;
+    }
+    .sb-conversations{
+        display: none;
+    }
+    .sb-header{
+        flex-direction: column;
+        flex: 1;
+        width: min-content;
+    }
+    .other-items{
+        flex-direction: column;
+    }
+    .profilePic{
+        align-self: center;
+    }
+    .ChatArea-container{
+        flex: 1;
+    }
+    
+
+    .sidebar-container{
+        flex: 0;
+    }
+    .main-container{
+        height: 100vh;
+        width: 100vw;
+        /* gap: 4px; */
+    }
+    /* .chatArea-header{
+        margin-left: 0px;
+    }
+    .messages-container{
+        margin-left: 0px;
+    }
+    .text-input-area{
+        margin-left: 0px;
+    } */
+
+
 }

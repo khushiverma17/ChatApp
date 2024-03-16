@@ -8,7 +8,7 @@ function ConversationsItem({props}){
     return(
         <div className="conversation-container to-hover-conversation" onClick={()=>{navigate("chat")}}>
             <p className="con-icon">{props.Name[0]}</p>
-            <p className={"con-title" + ((lightTheme)?"" : " dark")}>{props.Name}</p>
+            <p className="con-title"></p>
             <p className="con-lastMessage">{props.lastMessage}</p>
             <p className="con-timeStamp">{props.timeStamp}</p>
         </div>

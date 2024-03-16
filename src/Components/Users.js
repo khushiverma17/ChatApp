@@ -15,7 +15,7 @@ function Users(){
             </div>
             <div className={"sb-search" + ((lightTheme)?"" : " dark")}>
                 <IconButton>
-                    <SearchIcon/>
+                    <SearchIcon className={"icon" + ((lightTheme)?"" : " dark")}/>
                 </IconButton>
                 <input placeholder="Search" className={"search-box" + ((lightTheme)?"" : " dark")}/>
             </div>

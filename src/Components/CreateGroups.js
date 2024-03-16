@@ -6,11 +6,11 @@ import { useSelector } from "react-redux";
 function CreateGroups(){
     const lightTheme=useSelector(state=>state.themeKey);
     return(
-        <div className="create-group">
-            <div className={"group-name-container" + ((lightTheme)?"" : " dark")}>
-                <input className={"group-name-input" + ((lightTheme)?"" : " dark")} placeholder="Enter Group Name"></input>
+        <div className={"create-group" + ((lightTheme)?"" : " dark")}>
+            <div className="group-name-container">
+                <input className="group-name-input" placeholder="Enter Group Name"></input>
                 <IconButton className="tick">
-                    <DoneOutlineIcon className={"icon" + ((lightTheme)?"" : " dark")}/>
+                    <DoneOutlineIcon/>
                 </IconButton>
 
             </div>
