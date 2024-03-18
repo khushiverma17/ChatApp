@@ -10,7 +10,7 @@ function Login(){
                 <img src={logo} alt="logo" className="welcome-logo"></img>
             </div>
             <div className="login-box">
-            <p  className="login-to-account" style={{fontSize: "28px", marginBottom: "13px"}}>Login to your account</p>
+            <p  className="login-to-account" style={{fontSize: "28px", marginBottom: "13px", color: "#3eb489"}}>Login to your account</p>
 
                 <TextField id="standard-basic" label="Enter user name" variant="outlined" />
                 <TextField id="outlined-password-input" label="Password" type="password" autoComplete="current-password"/>
