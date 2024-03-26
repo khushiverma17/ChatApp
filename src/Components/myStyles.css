@@ -1,6 +1,5 @@
 .dark{
     background-color: #2d3941 !important;
-    /* color: whitesmoke !important; */
     color: rgb(164, 162, 162) !important;
 
 }
@@ -410,7 +409,7 @@
         height: 10px !important;
         width:  100px !important;
     }
-    .login-button{
+    .signup-button{
         height: 25px;
         width: 80px;
     }

@@ -24,8 +24,6 @@ function App() {
           <Route path="users" element={<Users/>}></Route>
           <Route path="groups" element={<Groups/>}></Route>
           <Route path="creategroups" element={<CreateGroups/>}></Route>
-
-
         </Route>
 
       </Routes>
