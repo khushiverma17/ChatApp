@@ -1,24 +1,33 @@
-const express=require("express");
+// const express=require("express");
 const UserModel=require("../models/userModel")
 const expressAsyncHandler=require("express-async-handler");
+//Login
 const generateToken = require("../Config/generateToken");
 
-const loginController=expressAsyncHandler(async(res,req)=>{
+const loginController=expressAsyncHandler(async(req, res)=>{
+    console.log(req.body);
     const {name, password}=req.body;
-    const user=UserModel.findOne({name})
+
+    const user=await UserModel.findOne({name})
+
+    console.log("Fetched user data",user);
+    console.log(await user.matchPassword(password));
 
     if(user && (await user.matchPassword(password)))
     {
-        res.json({
+        const response={
             _id: user._id,
             name: user.name,
             email: user.email,
             isAdmin: user.isAdmin,
             token: generateToken(user._id),
-        })
+        };
+        console.log(response);
+        res.json(response);
     }
     else
     {
+        res.status(401);
         throw new Error("Invalid Username of Password");
     }
 
@@ -68,5 +77,20 @@ const registerController=expressAsyncHandler( async(req,res)=>{
 
 });
 
+const fetchAllUsersController=expressAsyncHandler(async(req,res)=>{
+    const keyword=req.query.search
+    ? {
+        $or: [
+            { name: {$regex: req.query.search, $options: "i"}},
+            { email: {$regex: req.query.search, $options: "i"}},
+        ],
+    }
+    :{};
+    const users=await UserModel.find(keyword).find({
+        _id: {$ne: req.user._id},
+    });
+    res.send(users);
+});
 
-module.exports ={loginController,registerController};
+
+module.exports ={loginController,registerController,fetchAllUsersController};
