@@ -1,6 +1,6 @@
 import React from "react";
 import './myStyles.css';
-import people from "./people.png";
+// import people from "./people.png";
 import SearchIcon from '@mui/icons-material/Search';
 import { IconButton } from "@mui/material";
 import { useSelector } from "react-redux";
@@ -10,7 +10,7 @@ function Groups(){
     return(
         <div className="list-container">
             <div className={"ug-header" + ((lightTheme)?"" : " dark")}>
-                <img src={people} style={{height:"2rem" , width:"2rem"}} ></img>
+                {/* <img src={people} style={{height:"2rem" , width:"2rem"}} ></img> */}
                 <p className={"ug-title" + ((lightTheme)?"" : " dark")}>Groups Available</p>
             </div>
             <div className={"sb-search" + ((lightTheme)?"" : " dark")}>
