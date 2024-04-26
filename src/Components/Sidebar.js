@@ -27,17 +27,17 @@ function Sidebar(){
 
     const [conversations, setConversations]= useState([
         {
-            Name: "Test1",
+            Name: "Smith",
             lastMessage: "Last Message #1",
             timeStamp: "Today",
         },
         {
-            Name: "Test2",
+            Name: "John",
             lastMessage: "Last Message #2",
             timeStamp: "Today",
         },
         {
-            Name: "Test3",
+            Name: "Max",
             lastMessage: "Last Message #3",
             timeStamp: "Today",
         }
