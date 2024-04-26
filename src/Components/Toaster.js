@@ -1,4 +1,4 @@
-import {Alert, IconButton, Snackbar} from "@mui/=material"
+import {Alert, IconButton, Snackbar} from "@mui/material"
 import CloseIcon from "@mui/icons-material/Close"
 import React, { useState } from "react"
 import { Icon } from "@mui/material";
@@ -10,6 +10,7 @@ export default function Toaster({message}){
         if(reason==="clickaway"){
             return;
         }
+        
         setOpen(false);
     }
     return (
