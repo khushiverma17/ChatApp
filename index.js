@@ -6,16 +6,17 @@ const cors= require("cors");
 const {notFound, errorHandler} = require("./middleware/errormiddleware")
 const app = express();
 
+
 app.use(
     cors({
         origin:"*",
     })
 )
+dotenv.config();    
 
 
 
 
-dotenv.config();
 app.use(express.json());
 
 
@@ -24,7 +25,7 @@ app.use(express.json());
 const connectDb = async () => {
     
     try {
-        const connect = await mongoose.connect(process.env.mongo_URI);
+        const connect = await mongoose.connect(process.env.MONGO_URI);
         console.log("Server is connected to database");
     }
     catch (err) {
@@ -37,6 +38,7 @@ app.get("/", (req, res) => {
     res.send("API is running")
 })
 
+
 app.use("/user", userRoutes)
 // app.use(express.json());
 
@@ -44,7 +46,7 @@ app.use(notFound);
 app.use(errorHandler);
 
 
-console.log(process.env.mongo_URI)
+console.log(process.env.MONGO_URI)
 
 
 

@@ -1,6 +1,6 @@
 get function in express
 localhost:5000
-dotnv
+dotenv
 khushiverma1708
 CgkaegJfJOOEq8SD  ==>password of mongodb
 
