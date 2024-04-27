@@ -34,16 +34,17 @@ const loginController=expressAsyncHandler(async(req, res)=>{
 
 });
 
+
 const registerController=expressAsyncHandler( async(req,res)=>{
     const {name, email, password}=req.body;
-
+    
     //check for all fields
     if(!name || !email || !password)
     {
         res.status(400).send();
         throw Error("All necessary input fields have not been filled");
     }
-
+    
     //preexisting user mail
     const userExist=await UserModel.findOne({email});
     if(userExist){
@@ -55,8 +56,8 @@ const registerController=expressAsyncHandler( async(req,res)=>{
     if(userNameExist){
         throw new Error("UserName already taken")
     }
-
-
+    
+    
     //create an entry in database
     const user= await UserModel.create({name, email, password});
     if(user)
@@ -74,10 +75,12 @@ const registerController=expressAsyncHandler( async(req,res)=>{
         res.status(400);
         throw new Error("Registration Error")
     }
-
+    
 });
 
+//it fetches all the users that are currently registered except the current user
 const fetchAllUsersController=expressAsyncHandler(async(req,res)=>{
+    // This line checks if there is a search query parameter (search) in the request. If it exists, it constructs a MongoDB query object (keyword) to search for users based on their name or email using a regular expression ($regex). If the search query parameter doesn't exist, it sets keyword to an empty object.
     const keyword=req.query.search
     ? {
         $or: [
