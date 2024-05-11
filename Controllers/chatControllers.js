@@ -13,44 +13,44 @@ const accessChat = asyncHandler(async (req, res) => {
     // Queries the Chat collection to find chats where isGroupChat is false and both the authenticated user (req.user._id) and the specified userId are participants.
     var isChat = await Chat.find({
         isGroupChat: false,
-        $ans: [
+        $and: [
             { users: { $elemMatch: { $eq: req.user._id } } },
             { users: { $elemMatch: { $eq: userId } } },
         ]
     })
-    /*so what is populate? suppose i have 2 collections of database called users and latestMessage
-    chat colection:
-    {
-        "_id": "chat_id_123",
-        "users": ["user_id_1", "user_id_2"],
-        "latestMessage": "message_id_456"
+        /*so what is populate? suppose i have 2 collections of database called users and latestMessage
+        chat colection:
+        {
+            "_id": "chat_id_123",
+            "users": ["user_id_1", "user_id_2"],
+            "latestMessage": "message_id_456"
+          }
+        After populating 
+        {
+      "_id": "chat_id_123",
+      "users": [
+        {
+          "_id": "user_id_1",
+          "name": "User 1",
+          "email": "user1@example.com"
+        },
+        {
+          "_id": "user_id_2",
+          "name": "User 2",
+          "email": "user2@example.com"
+        }
+      ],
+      "latestMessage": {
+        "_id": "message_id_456",
+        "content": "Hello!",
+        "sender": {
+          "_id": "user_id_1",
+          "name": "User 1",
+          "email": "user1@example.com"
+        }
       }
-    After populating 
-    {
-  "_id": "chat_id_123",
-  "users": [
-    {
-      "_id": "user_id_1",
-      "name": "User 1",
-      "email": "user1@example.com"
-    },
-    {
-      "_id": "user_id_2",
-      "name": "User 2",
-      "email": "user2@example.com"
     }
-  ],
-  "latestMessage": {
-    "_id": "message_id_456",
-    "content": "Hello!",
-    "sender": {
-      "_id": "user_id_1",
-      "name": "User 1",
-      "email": "user1@example.com"
-    }
-  }
-}
-    */
+        */
         .populate("users", "-password")
         .populate("latestMessage")
 
@@ -103,7 +103,7 @@ const fetchChats = asyncHandler(async (req, res) => {
 
             });
     } catch (error) {
-        res.status(500);
+        res.status(400);
         throw new Error(error.message);
     }
 })
@@ -127,74 +127,74 @@ const createGroupChat = asyncHandler(async (req, res) => {
     console.log("chatController/createGroups: ", req);
     users.push(req.user);
 
-    try{
-        const groupChat=await Chat.create({
+    try {
+        const groupChat = await Chat.create({
             chatName: req.body.name,
-            users:users,
-            isGroupChat:true,
-            groupAdmin:req.user,
+            users: users,
+            isGroupChat: true,
+            groupAdmin: req.user,
         })
-        const fullGroupChat=await Chat.findOne({_id:groupChat._id})
-        .populate("users", "-password")
-        .populate("groupAdmin", "-password")
+        const fullGroupChat = await Chat.findOne({ _id: groupChat._id })
+            .populate("users", "-password")
+            .populate("groupAdmin", "-password")
 
         res.status(200).json(fullGroupChat);
-    }catch(error){
+    } catch (error) {
         res.status(400)
         throw new Error(error.message);
     }
 })
 
-const groupExit=asyncHandler(async(req, res)=>{
-    const {chatId, userId}=req.body;
+const groupExit = asyncHandler(async (req, res) => {
+    const { chatId, userId } = req.body;
 
     //check if the requester is an admin
-    const removed=await Chat.findByIdAndUpdate(
+    const removed = await Chat.findByIdAndUpdate(
         chatId,
         {
-            $pull:{users:userId},
+            $pull: { users: userId },
         },
         {
-            new:true,
+            new: true,
         }
     )
-    .populate("users", "-password")
-    .populate("groupAdmin", "-password")
+        .populate("users", "-password")
+        .populate("groupAdmin", "-password")
 
-    if(!removed){
+    if (!removed) {
         res.status(404);
         throw new Error("Chat Not Found");
-    }else{
+    } else {
         res.json(removed);
     }
-        
+
 })
 
-const addSelfToGroup=asyncHandler(async(req, res)=>{
-    const {chatId, userId}=req.body
+const addSelfToGroup = asyncHandler(async (req, res) => {
+    const { chatId, userId } = req.body
 
-    const added= await Chat.findByIdAndUpdate(
+    const added = await Chat.findByIdAndUpdate(
         chatId,
         {
-            $push:{users:userId},
+            $push: { users: userId },
         },
         {
-            new:true,
+            new: true,
         }
     )
-    .populate("users", "-password")
-    .populate("groupAdmin", "-password")
+        .populate("users", "-password")
+        .populate("groupAdmin", "-password")
 
-    if(!added){
+    if (!added) {
         res.status(404)
         throw new Error("Chat Not Found")
-    }else{
+    } else {
         res.json(added);
     }
 })
 
 
-module.exports={
+module.exports = {
     accessChat,
     fetchChats,
     fetchGroups,

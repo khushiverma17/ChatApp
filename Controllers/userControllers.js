@@ -1,4 +1,4 @@
-// const express=require("express");
+const express=require("express");
 const UserModel=require("../models/userModel")
 const expressAsyncHandler=require("express-async-handler");
 //Login
@@ -41,7 +41,7 @@ const registerController=expressAsyncHandler( async(req,res)=>{
     //check for all fields
     if(!name || !email || !password)
     {
-        res.status(400).send();
+        res.send(400);
         throw Error("All necessary input fields have not been filled");
     }
     

@@ -1,4 +1,4 @@
-const expressAsyncHandler= require("express-aync-handler")
+const expressAsyncHandler= require("express-async-handler")
 const Message= require("../models/messageModel")
 const User = require("../models/userModel")
 const Chat = require("../models/chatModel")
@@ -12,7 +12,7 @@ const allMessages= expressAsyncHandler(async(req, res)=>{
         res.json(messages)
     }catch(error){
         res.status(400)
-        throw new Error(error.Message)
+        throw new Error(error.message)
     }
 });
 
@@ -32,7 +32,7 @@ const sendMessage=expressAsyncHandler(async(req, res)=>{
         var message=await Message.create(newMessage)
 
         console.log(message);
-        message=await message.populate("sender", "name")
+        message=await message.populate("sender", "name pic")
         message=await message.populate("chat")
         message=await message.populate("receiver")
         message=await message.populate(message, {

@@ -1,26 +1,23 @@
 const express = require('express');
 const dotenv = require("dotenv");
 const { default: mongoose } = require('mongoose');
-const userRoutes = require("./Routes/userRoutes")
 const cors= require("cors");
 const {notFound, errorHandler} = require("./middleware/errormiddleware")
+const chatRoutes = require ("./Routes/chatRoutes")
+const messageRoutes = require("./Routes/messageRoutes")
+const userRoutes = require("./Routes/userRoutes")
+
 const app = express();
 
 
 app.use(
     cors({
-        origin:"*",
+      origin: "*",
     })
-)
+  );
 dotenv.config();    
-
-
-
-
 app.use(express.json());
-
-
-//to make connection to our database
+app.use(cors())
 
 const connectDb = async () => {
     
@@ -38,18 +35,64 @@ app.get("/", (req, res) => {
     res.send("API is running")
 })
 
-
 app.use("/user", userRoutes)
+app.use("/chat", chatRoutes)
+app.use("/message", messageRoutes)
+
+const PORT = process.env.PORT || 8080;
+const server = app.listen(8080, console.log("Server is running"));
+const io=require("socket.io")(server, {
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST"]
+    },
+    pingTimeOut: 60000,
+})
+
+io.on("connection", (socket)=>{
+    socket.on("setup", (user)=>{
+        socket.join(user.data._id)
+        socket.emit("connected")
+    })
+    socket.on("join chat", (room)=>{
+        socket.join(room)
+    })
+    socket.on("new message",(newMessageStatus)=>{
+        var chat= newMessageStatus.chat
+        if(!chat.users){
+            return console.log("chat.users not defined")
+        }
+        chat.users.forEach((user)=>{
+            if(user._id==newMessageStatus.sender._id) return;
+            socket.in(user._id).emit("message received", newMessageReceived);
+        })
+    })
+})
+// const userRoutes= require("./Routes/userRoutes")
+// const chatRoutes= require("./Routes/chatRoutes")
+// const messageRoutes= require("./Routes/messageRoutes")
+
+
+//to make connection to our database
+
+
+
+
+
+
+
 // app.use(express.json());
 
-app.use(notFound);
-app.use(errorHandler);
+// app.use(notFound);
+// app.use(errorHandler);
 
 
-console.log(process.env.MONGO_URI)
+// console.log(process.env.MONGO_URI)
 
 
 
-const PORT = process.env.PORT || 5000;
 
-app.listen(5000, console.log("Server is running"));
+
+
+
+

@@ -15,12 +15,9 @@ const chatModel=mongoose.Schema({
     },
     groupAdmin:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Message"
+        ref: "User"
     },
-    chat:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Chat",
-    }
+    
 },
 {
     timeStamp:true,
@@ -28,5 +25,5 @@ const chatModel=mongoose.Schema({
 );
 
 // till now making of schema is done now make model
-const Chat= mongoose.Model("Chat",ChatModel);
-module.export=Chat; 
+const Chat= mongoose.model("Chat",chatModel);
+module.exports = Chat; 
