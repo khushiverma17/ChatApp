@@ -3,14 +3,16 @@ import './myStyles.css';
 import people from "./people.png";
 import SearchIcon from '@mui/icons-material/Search';
 import { Icon, IconButton } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch} from "react-redux";
 import { AnimatePresence, motion } from "framer-motion";
 import {useNavigate} from "react-router-dom"
 import axios from "axios"
 import RefreshIcon from "@mui/icons-material/Refresh";
+import { refreshSidebarFun } from "../Features/refreshSidebar";
 
 
 function Users() {
+    const dispatch = useDispatch()
     const [refresh, setRefresh] = useState(true);
     const lightTheme = useSelector(state => state.themeKey);
     const [users, setUsers] = useState([])
@@ -27,7 +29,7 @@ function Users() {
                 Authorization: `Bearer ${userData.data.token}`
             }
         }
-        axios.get("http://localhost:5000/user/fetchUsers", config).then((data) => {
+        axios.get("http://localhost:8080/user/fetchUsers", config).then((data) => {
             console.log("User data from API", data)
             setUsers(data.data)
         })
@@ -70,19 +72,21 @@ function Users() {
                                 className={"list-item" + ((lightTheme) ? "" : " dark")}
                                 key={index}
                                 onClick={() => {
-                                    console.log("Creating chat with ", user.name);  //THIS
+                                    // console.log("hello");
+                                    // nav("./")
+                                    // console.log("Creating chat with ", user.name);  //THIS
                                     const config = {
                                         headers: {
                                             Authorization: `Bearer ${userData.data.token}`
-                                        }
-                                    }
-                                    axios.post(
-                                        "http://localhost:3000/chat/",
+                                        },
+                                    };
+                                    axios.post("http://localhost:8080/chat/",
                                         {
                                             userId: user._id,
                                         },
                                         config
-                                    )
+                                    );
+                                    dispatch(refreshSidebarFun());
                                 }}
                             >
                                 <p className="con-icon">K</p>

@@ -31,15 +31,15 @@ function Login() {
                 }
             };
             const response = await axios.post(
-                "http://localhost:5000/user/login",
+                "http://localhost:8080/user/login",
                 data,
                 config
             );
             console.log("Login ", response);
             setLogInStatus({ msg: "Success", key: Math.random() });
-            navigate("/app/welcome")
-            localStorage.setItem("userData", JSON.stringify(response));
             setLoading(false);
+            localStorage.setItem("userData", JSON.stringify(response));
+            navigate("/app/welcome")
 
         }
         catch (error) {
@@ -60,7 +60,7 @@ function Login() {
                 },
             };
             const response = await axios.post(
-                "http://localhost:5000/user/register",
+                "http://localhost:8080/user/register",
                 data,
                 config
             );
@@ -72,11 +72,17 @@ function Login() {
         }
         catch (error) {
             console.log(error);
-            if (error.response && error.response.status === 405) {
+            if (error.response) {
                 setLogInStatus({
                     msg: "User with this email id already exists",
                     key: Math.random(),
                 })
+            }
+            if (error.response.status === 406) {
+                setLogInStatus({
+                    msg: "User Name already Taken, Please take another one",
+                    key: Math.random(),
+                });
             }
             setLoading(false);
         }
@@ -107,6 +113,11 @@ function Login() {
                             variant="outlined"
                             color="secondary"
                             name="name"
+                            onKeyDown={(event) => {
+                                if (event.code === "Enter") {
+                                    loginHandler();
+                                }
+                            }}
                         />
 
 
@@ -120,6 +131,11 @@ function Login() {
                             autoComplete="current-password"
                             color="secondary"
                             name="password"
+                            onKeyDown={(event) => {
+                                if (event.code === "Enter") {
+                                    loginHandler();
+                                }
+                            }}
 
                         />
                         <Button
@@ -156,6 +172,11 @@ function Login() {
                             color="secondary"
                             name="name"
                             helperText=""
+                            onKeyDown={(event) => {
+                                if (event.code === "Enter") {
+                                    signUpHandler();
+                                }
+                            }}
                         ></TextField>
                         <TextField
                             onChange={changeHandler}
@@ -164,6 +185,11 @@ function Login() {
                             variant="outlined"
                             color="secondary"
                             name="email"
+                            onKeyDown={(event) => {
+                                if (event.code === "Enter") {
+                                    signUpHandler();
+                                }
+                            }}
                         ></TextField>
                         <TextField
                             onChange={changeHandler}
@@ -173,6 +199,11 @@ function Login() {
                             autoComplete="current-password"
                             color="secondary"
                             name="password"
+                            onKeyDown={(event) => {
+                                if (event.code === "Enter") {
+                                    signUpHandler();
+                                }
+                            }}
                         ></TextField>
                         <Button
                             variant="outlined"

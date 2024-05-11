@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
+import DoneOutlineRoundedIcon from '@mui/icons-material/DoneOutlineRounded';
 import { IconButton ,
         Button,
         Dialog, 
@@ -41,13 +41,15 @@ function CreateGroups() {
             }
         }
         axios.post(
-            "http://localhost:3000/chat/createGroup",
+            "http://localhost:8080/chat/createGroups",
             {
             name:groupName, 
-            users: []   // HERE
+            users: ["662b455f8dda357c15023318", "662b46638dda357c1502331d"]   // HERE
             },
             config
-        )
+        ).catch(error=>{
+            console.log("ERROR IS ",error)
+        })
         nav("/app/groups")
     };
 
@@ -55,7 +57,7 @@ function CreateGroups() {
 
     return (
         <>
-            <div>
+            <div style={{backgroundColor:"red"}}>
                 <Dialog
                     open={open}
                     onClose={handleClose}

@@ -2,13 +2,18 @@ import React, { useContext, useEffect, useState } from "react";
 import './myStyles.css';
 import people from "./people.png";
 import SearchIcon from '@mui/icons-material/Search';
+import RefreshIcon from "@mui/icons-material/Refresh";
 import { IconButton } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { AnimatePresence, anticipate, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import {myContext} from "./MainContainer"
+import axios from "axios"
+import refreshSidebarFun from "../Features/refreshSidebar";
+
 
 function Groups(){
-    const [refresh, setRefresh] = useContext(myContext)
+    const {refresh, setRefresh} = useContext(myContext)
     const lightTheme=useSelector(state=>state.themeKey);
     const dispatch=useDispatch();
     const [groups, setGroups] = useState([]);
@@ -29,9 +34,9 @@ function Groups(){
             }
         }
         axios
-            .get("http://localhost:3000/chat/fetchGroups", config)
+            .get("http://localhost:8080/chat/fetchGroups", config)
             .then((response)=>{
-                console.log("Group Data from API ", response.data)
+                // console.log("Group Data from API ", response.data)
                 setGroups(response.data);
             })
     }, [refresh])
