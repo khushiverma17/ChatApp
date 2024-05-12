@@ -74,18 +74,23 @@ function Users() {
                                 onClick={() => {
                                     // console.log("hello");
                                     // nav("./")
-                                    // console.log("Creating chat with ", user.name);  //THIS
+                                    console.log("Creating chat with ", user.name);  //THIS
                                     const config = {
                                         headers: {
                                             Authorization: `Bearer ${userData.data.token}`
                                         },
                                     };
+                                    console.log("after config")
                                     axios.post("http://localhost:8080/chat/",
                                         {
                                             userId: user._id,
                                         },
                                         config
-                                    );
+                                    ).then(()=>{
+                                        console.log("success")
+                                    }).catch((error)=>{
+                                        console.log(error)
+                                    })
                                     dispatch(refreshSidebarFun());
                                 }}
                             >

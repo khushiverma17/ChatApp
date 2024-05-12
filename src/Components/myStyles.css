@@ -150,6 +150,8 @@
     overflow: scroll;
     scrollbar-width: none;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 63vw;
+    height: 70%;
 
 
 }
@@ -184,11 +186,15 @@
     border-radius: 20px;
     width: max-content;
     margin-top: 10px;
+    /* background-color: yellow;
+    height: 300px;
+    width: 40px; */
 }
 .self-message-container{
     display: flex;
     justify-content: flex-end;
 }
+
 .messageBox{
     display: flex;
     flex-direction: column;

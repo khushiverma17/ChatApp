@@ -128,6 +128,7 @@ function Sidebar() {
                                     key={index}
                                     className="conversation-container"
                                     onClick={()=>{
+                                        console.log(conversation._id)
                                         navigate("chat/" + conversation._id + "&" + chatName)
                                     }}
                                 >

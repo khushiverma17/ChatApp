@@ -38,9 +38,11 @@ function Login() {
             console.log("Login ", response);
             setLogInStatus({ msg: "Success", key: Math.random() });
             setLoading(false);
+
+            console.log(Date.now())
             localStorage.setItem("userData", JSON.stringify(response));
             navigate("/app/welcome")
-
+            
         }
         catch (error) {
             setLogInStatus({
@@ -50,7 +52,7 @@ function Login() {
         }
         setLoading(false)
     }
-
+    
     const signUpHandler = async () => {
         setLoading(true);
         try {
@@ -67,6 +69,8 @@ function Login() {
             console.log(response);
             setSignInStatus({ msg: "Success", key: Math.random() });
             navigate("/app/welcome");
+
+            console.log(Date.now())
             localStorage.setItem("userData", JSON.stringify(response));
             setLoading(false);
         }

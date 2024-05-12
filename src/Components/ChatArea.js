@@ -7,9 +7,12 @@ import MessageSelf from "./MessagesSelf";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { myContext } from "./MainContainer";
-import axios from "axios"
+import axios from "axios";
+import io from "socket.io-client"
 
-const ENDPOINT="http://localhost:5000"
+
+
+const ENDPOINT="http://localhost:8080"
 var socket, chat;
 
 function ChatArea() {
@@ -20,10 +23,11 @@ function ChatArea() {
     const [chat_id, chat_user] = dyParams._id.split("&")
     const userData = JSON.parse(localStorage.getItem("userData"))
     const [allMessages, setAllMessages] = useState([])
-    const [refresh, setRefresh] = useContext(myContext)
+    const {refresh, setRefresh} = useContext(myContext)
     const [loaded, setLoaded] = useState(false)
     const [allMessagesCopy, setAllMessagesCopy] = useState([])
     const [socketConnectionStatus, setSocketConnectionStatus] = useState(false);
+
     
 
     const sendMessage = () => {
@@ -45,7 +49,7 @@ function ChatArea() {
             .then(({ response }) => {
                 data=response
                 console.log("Message Fired")
-                socket.emit("newMessage", data);
+                socket.emit("newMessage", data);    //remove
             })
             .catch(error=>{
                 console.log("ERROR IS ", error)
@@ -53,32 +57,40 @@ function ChatArea() {
     }
     
     useEffect(()=>{
-        socket.on("message received", (newMessage)=>{
-            if(!allMessagesCopy || allMessagesCopy._id !== newMessage._id){
-                setAllMessages([...allMessages], newMessage)
-            }else{
-                setAllMessages([...allMessages], newMessage)
-            }
+        socket = io(ENDPOINT);
+        socket.emit("setup",userData);
+        socket.on("connection",()=>{
+          setSocketConnectionStatus(!socketConnectionStatus);
         })
-    })
-    useEffect(() => {
-        console.log("Users refreshed")
-        const config = {
-            headers: {
-                Authorization: `Bearer ${userData.data.token}`
-            }
-        }
-        axios
-            .get("http://localhost:8080/message/" + chat_id, config)
-            .then(({ data }) => {
-                // console.log("get in chatarea");
-                setAllMessages(data)
-                setLoaded(true)
-                socket.emit("join chat", chat_id)
-            })
-            setAllMessagesCopy(allMessages)
-    }, [refresh, chat_id, userData.data.token, allMessages])
+        // eslint-disable-next-line
+      },[]);
 
+      useEffect(()=>{
+        socket.on("message received",(newMessage)=>{
+           if(!allMessagesCopy || allMessagesCopy._id!==newMessage._id){}
+           else{
+            setAllMessages([...allMessages],newMessage);
+           }
+        })
+      })
+
+      useEffect(() => {
+        console.log("Users refreshed");
+        const config = {
+          headers: {
+            Authorization: `Bearer ${userData.data.token}`,
+          },
+        };
+        axios
+          .get("http://localhost:8080/message/" + chat_id, config)
+          .then(({ data }) => {
+            setAllMessages(data);
+            setLoaded(true);
+            socket.emit("join chat",chat_id);
+          });
+          setAllMessagesCopy(allMessages);
+          // eslint-disable-next-line
+      }, [refresh, chat_id,userData.data.token]);
 
 
 
@@ -139,7 +151,6 @@ function ChatArea() {
                 <div className={"messages-container" + ((lightTheme) ? "" : " dark")}>
                     {allMessages
                         .slice(0)
-                        .reverse()
                         .map((message, index) => {
                             const sender = message.sender;
                             const self_id = userData.data._id
