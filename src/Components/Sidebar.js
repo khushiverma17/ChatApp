@@ -101,9 +101,20 @@ function Sidebar() {
             </div>
             <div className={"sb-conversations" + ((lightTheme) ? "" : " dark")}>
                 {conversations.map((conversation, index) => {
-                    if(conversation.users.length===1){
-                        return <div key={index}></div>
+                    var chatName=""
+                    if(conversation.isGroupChat){
+                        chatName=conversation.chatName
                     }
+                    else{
+                        conversation.users.map((user)=>{
+                            if(user._id !== userData.data._id){
+                                chatName=user.name
+                            }
+                        })
+                    }
+                    // if(conversation.users.length===1){
+                    //     return <div key={index}></div>
+                    // }
                     if(conversation.latestMessage===undefined){
                         return (
                             <div
@@ -117,14 +128,14 @@ function Sidebar() {
                                     key={index}
                                     className="conversation-container"
                                     onClick={()=>{
-                                        navigate("chat/" + conversation._id + "&" + conversation.users[1].name)
+                                        navigate("chat/" + conversation._id + "&" + chatName)
                                     }}
                                 >
                                     <p className={"con-icon" +(lightTheme ? "" : "dark")}>
-                                        {conversation.users[1].name[0]}
+                                        {chatName[0]}
                                     </p>
                                     <p className={"con-title" +(lightTheme ? "" : "dark")}>
-                                        {conversation.users[1].name}
+                                        {chatName}
                                     </p>
                                     <p className={"con-lastMessage" +(lightTheme ? "" : "dark")}>
                                         No previous messages, click here to start a new chat
@@ -140,18 +151,18 @@ function Sidebar() {
                                 className="conversation-container"
                                 onClick={()=>{
                                     navigate(
-                                        "chat/" + conversation._id + "&" + conversation.users[1].name
+                                        "chat/" + conversation._id + "&" + chatName
                                     )
                                 }}
                             >
                                 <p className={"con-icon" + (lightTheme ? "" : "dark")}>
-                                    {conversation.users[1].name[0]}
+                                    {chatName[0]}
                                 </p>
                                 <p className={"con-title" + (lightTheme ? "" : "dark")}>
-                                    {conversation.users[1].name}
+                                    {chatName}
                                 </p>
                                 <p className={"con-lastMessage"}>
-                                    {conversation.latestMessage.content}
+                                    {chatName.latestMessage.content}
                                 </p>
                             </div>
                         )

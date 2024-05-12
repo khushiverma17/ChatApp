@@ -79,8 +79,20 @@ function Groups(){
                                 className={"list-item" + (lightTheme ? "" : "dark") }
                                 key={index}
                                 onClick={()=>{
-                                    console.log("Creating chat with group", group.name)
-                                    dispatch(refreshSidebarFun());
+                                    const config ={
+                                        headers:{
+                                            Authorization: `Bearer ${user.token}`
+                                        }
+                                    };
+                                    axios.put(
+                                        "http://localhost:8080/chat/addSelfToGroup",
+                                        {
+                                            chatId:group._id,
+                                            userId:userData.data._id
+                                        },
+                                        config
+                                    )
+                                    dispatch(refreshSidebarFun())
                                 }}
                             >
                                 <p className={"con-icon" + (lightTheme ? "" : "dark")}></p>

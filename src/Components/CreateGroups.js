@@ -41,15 +41,16 @@ function CreateGroups() {
             }
         }
         axios.post(
-            "http://localhost:8080/chat/createGroups",
+            "http://localhost:8080/chat/createGroup",
             {
             name:groupName, 
-            users: ["662b455f8dda357c15023318", "662b46638dda357c1502331d"]   // HERE
+            users: '["662b455f8dda357c15023318", "662b46638dda357c1502331d"]'   // HERE
             },
             config
         ).catch(error=>{
             console.log("ERROR IS ",error)
         })
+        // console.log("Hello")
         nav("/app/groups")
     };
 
