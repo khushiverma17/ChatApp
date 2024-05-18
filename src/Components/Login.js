@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import logo from './logo.png'
+import logo from '../Assets/logo.jpg'
 import { Button, TextField, Backdrop, CircularProgress } from "@mui/material";
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
@@ -40,7 +40,8 @@ function Login() {
             setLoading(false);
 
             console.log(Date.now())
-            localStorage.setItem("userData", JSON.stringify(response));
+            // localStorage.setItem("userData", JSON.stringify(response));
+            sessionStorage.setItem("userData", JSON.stringify(response));
             navigate("/app/welcome")
             
         }
@@ -71,7 +72,8 @@ function Login() {
             navigate("/app/welcome");
 
             console.log(Date.now())
-            localStorage.setItem("userData", JSON.stringify(response));
+            // localStorage.setItem("userData", JSON.stringify(response));
+            sessionStorage.setItem("userData", JSON.stringify(response));
             setLoading(false);
         }
         catch (error) {
@@ -104,7 +106,7 @@ function Login() {
             </Backdrop>
             <div className="login-container">
                 <div className="image-container">
-                    <img src="https://t4.ftcdn.net/jpg/02/53/91/57/360_F_253915708_G8elkrM3HdQPi3txjwTirLDXVfPuqnww.jpg" alt="logo" className="welcome-logo"></img>
+                    <img src={logo} alt="logo" className="welcome-logo"></img>
                 </div>
                 {showLogin &&
                     <div className="login-box">

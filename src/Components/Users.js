@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import './myStyles.css';
-import people from "./people.png";
 import SearchIcon from '@mui/icons-material/Search';
 import { Icon, IconButton } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,6 +8,7 @@ import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { refreshSidebarFun } from "../Features/refreshSidebar";
+import Diversity3Icon from '@mui/icons-material/Diversity3';
 
 
 
@@ -18,7 +18,8 @@ function Users() {
     const [refresh, setRefresh] = useState(true);
     const lightTheme = useSelector(state => state.themeKey);
     const [users, setUsers] = useState([])
-    const userData = JSON.parse(localStorage.getItem("userData"))
+    // const userData = JSON.parse(localStorage.getItem("userData"))
+    const userData = JSON.parse(sessionStorage.getItem("userData"))
     const nav = useNavigate();
     if (!userData) {
         console.log("User not authenticated")
@@ -47,15 +48,12 @@ function Users() {
                 transition={{ ease: "anticipate", duration: "0.3" }}
                 className="list-container">
                 <div className={"ug-header" + ((lightTheme) ? "" : " dark")}>
-                    <img src={people} style={{ height: "2rem", width: "2rem" }}></img>
-                    <p className={"ug-title" + ((lightTheme) ? "" : " dark")}>Available Users</p>
                     <IconButton
-                        className={"icon" + ((lightTheme) ? "" : "dark")}
-                        onClick={() => {
-                            setRefresh(!refresh)
-                        }}>
-                        <RefreshIcon />
+                        className={"icon" + ((lightTheme) ? "" : " dark")}
+                        >
+                        <Diversity3Icon />
                     </IconButton>
+                    <p className={"ug-title" + ((lightTheme) ? "" : " dark")}>Available Users</p>
 
                 </div>
                 <div className={"sb-search" + ((lightTheme) ? "" : " dark")}>
@@ -74,18 +72,12 @@ function Users() {
                                 className={"list-item" + ((lightTheme) ? "" : " dark")}
                                 key={index}
                                 onClick={() => {
-
-                                    // console.log("hello");
-                                    // nav("./")
                                     console.log("Creating chat with ", user.name);  //THIS
                                     const config = {
                                         headers: {
                                             Authorization: `Bearer ${userData.data.token}`
                                         },
                                     };
-                                    // console.log("token is ", userData.data.token)
-                                    // console.log("after config")
-
 
                                     axios.post("http://localhost:8080/chat/",
                                         {
@@ -93,33 +85,26 @@ function Users() {
                                         },
                                         config
                                     )
-                                    .then((response) => {
-                                        // THIS IS THE SOLUTION BECAUSE IN THE APP.JS WE HAVE NESTED ROUTES CHAT/:ID ROUTE IS INSIDE APP ROUTE
-                                        // nav(`/app/chat/${user._id}`);
-                                        console.log("USER ISER IS ", userData)
-                                        // nav(`/app/chat/${userData.data._id}`);
-                                        // nav(`/app/chat/${user.data._id} `)
-                                        // nav("/app/chat" + user.data._id + "&" + userData.data.name)
-                                        // nav(`/app/chat/${response.data._id}`)
+                                        .then((response) => {
+                                            // THIS IS THE SOLUTION BECAUSE IN THE APP.JS WE HAVE NESTED ROUTES CHAT/:ID ROUTE IS INSIDE APP ROUTE
+                                            console.log("USER ISER IS ", userData)
 
 
-                                        //TASK IS TO SEND THE CORRECT ID HERE ONLY SO THAT IT GET DISPLAYED IN THE TOP OF CHATAREA
-                                        nav("/app/chat/" + response.data._id + "&" + response.data.users[0].name)
+                                            //TASK IS TO SEND THE CORRECT ID HERE ONLY SO THAT IT GET DISPLAYED IN THE TOP OF CHATAREA
+                                            nav("/app/chat/" + response.data._id + "&" + response.data.users[0].name)
 
 
-                                        // console.log("ljdfkldj", user.data._id)
 
-                                        // navigate("chat/" + conversation._id + "&" + chatName)
-                                        console.log("RESPONSE IS " , response);
-                                        console.log("success")
-                                    }).catch((error) => {
-                                        console.log(error)
-                                    })
+                                            console.log("RESPONSE IS ", response);
+                                            console.log("success")
+                                        }).catch((error) => {
+                                            console.log(error)
+                                        })
                                     dispatch(refreshSidebarFun());
                                     console.log("after")
                                 }}
                             >
-                                <p className="con-icon">K</p>
+                                <p className="con-icon">{user.name[0]}</p>
                                 <p className={"con-title" + ((lightTheme) ? "" : " dark")}>{user.name}</p>
                             </motion.div>
 

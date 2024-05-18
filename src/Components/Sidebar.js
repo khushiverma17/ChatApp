@@ -27,7 +27,8 @@ function Sidebar() {
     const {refresh, setRefresh} = useContext(myContext);
     console.log("Context API : refresh", refresh);
     const [conversations, setConversations] = useState([]);
-    const userData = JSON.parse(localStorage.getItem("userData"))
+    // const userData = JSON.parse(localStorage.getItem("userData"))
+    const userData = JSON.parse(sessionStorage.getItem("userData"))
     const nav = useNavigate();
     if (!userData) {
         console.log("User is not authenticated");
@@ -83,7 +84,8 @@ function Sidebar() {
                     </IconButton>
                     <IconButton
                         onClick={() => {
-                            localStorage.removeItem("userData");
+                            // localStorage.removeItem("userData");
+                            sessionStorage.removeItem("userData");
                             navigate("/");
                         }}
                     >
@@ -132,13 +134,13 @@ function Sidebar() {
                                         navigate("chat/" + conversation._id + "&" + chatName)
                                     }}
                                 >
-                                    <p className={"con-icon" +(lightTheme ? "" : "dark")}>
+                                    <p className="con-icon">
                                         {chatName[0]}
                                     </p>
-                                    <p className={"con-title" +(lightTheme ? "" : "dark")}>
+                                    <p className={"con-title" +(lightTheme ? "" : " dark")}>
                                         {chatName}
                                     </p>
-                                    <p className={"con-lastMessage" +(lightTheme ? "" : "dark")}>
+                                    <p className={"con-lastMessage" +(lightTheme ? "" : " dark")}>
                                         No previous messages, click here to start a new chat
                                     </p>
                                 </div>
@@ -156,10 +158,10 @@ function Sidebar() {
                                     )
                                 }}
                             >
-                                <p className={"con-icon" + (lightTheme ? "" : "dark")}>
+                                <p className="con-icon">
                                     {chatName[0]}
                                 </p>
-                                <p className={"con-title" + (lightTheme ? "" : "dark")}>
+                                <p className={"con-title" + (lightTheme ? "" : " dark")}>
                                     {chatName}
                                 </p>
                                 <p className={"con-lastMessage"}>
