@@ -68,31 +68,3 @@ io.on("connection", (socket)=>{
         })
     })
 })
-// const userRoutes= require("./Routes/userRoutes")
-// const chatRoutes= require("./Routes/chatRoutes")
-// const messageRoutes= require("./Routes/messageRoutes")
-
-
-//to make connection to our database
-
-
-
-
-
-
-
-// app.use(express.json());
-
-// app.use(notFound);
-// app.use(errorHandler);
-
-
-// console.log(process.env.MONGO_URI)
-
-
-
-
-
-
-
-
