@@ -128,7 +128,7 @@ function Sidebar() {
                                     key={index}
                                     className="conversation-container"
                                     onClick={()=>{
-                                        console.log(conversation._id)
+                                        console.log("CONVERSATION ID IS : ", conversation._id)
                                         navigate("chat/" + conversation._id + "&" + chatName)
                                     }}
                                 >
@@ -163,7 +163,7 @@ function Sidebar() {
                                     {chatName}
                                 </p>
                                 <p className={"con-lastMessage"}>
-                                    {chatName.latestMessage.content}
+                                    {/* {chatName.latestMessage.content} */}
                                 </p>
                             </div>
                         )

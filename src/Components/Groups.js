@@ -81,7 +81,7 @@ function Groups(){
                                 onClick={()=>{
                                     const config ={
                                         headers:{
-                                            Authorization: `Bearer ${user.token}`
+                                            Authorization: `Bearer ${userData.data.token}`
                                         }
                                     };
                                     axios.put(
@@ -91,8 +91,18 @@ function Groups(){
                                             userId:userData.data._id
                                         },
                                         config
-                                    )
-                                    dispatch(refreshSidebarFun())
+                                    ).then((response)=>{
+                                        nav("/app/chat/" + response.data._id +"&" + response.data.chatName)
+
+                                        console.log("RESPONSE IS: ", response)
+                                        console.log("Hello")
+                                        // nav("/")
+                                    }
+                                ).catch((error)=>{
+                                    console.log(error)
+                                })
+                                console.log("Creating chat wight ", group.chatName)
+                                    // dispatch(refreshSidebarFun())
                                 }}
                             >
                                 <p className={"con-icon" + (lightTheme ? "" : "dark")}></p>

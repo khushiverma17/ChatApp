@@ -17,8 +17,6 @@
     
 }
 .sidebar-container{
-    /* background-color: yellow; */
-    /* border: 2px solid brown; */
     flex: 0.3;
     display: flex;
     flex-direction: column;
@@ -72,7 +70,6 @@
     padding: 5px;
     margin: 5px;
     border-radius: 20px;
-    /* transition-duration: 0.5s; */
 }
 .to-hover-conversation:hover{
     background-color: #e7e6e6;
@@ -166,7 +163,6 @@
     border-radius: 20px;
     display: flex;
     justify-content: space-between;
-    /* background-color: #d9d9d9; */
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 .other-text-content{
@@ -186,9 +182,6 @@
     border-radius: 20px;
     width: max-content;
     margin-top: 10px;
-    /* background-color: yellow;
-    height: 300px;
-    width: 40px; */
 }
 .self-message-container{
     display: flex;
@@ -277,7 +270,6 @@
 }
 .list-container{
     flex: 0.7;
-    /* background-color: aquamarine; */
     
 }
 .ug-header{
@@ -301,7 +293,6 @@
     overflow: scroll;
     scrollbar-width: none;
     padding: 10px;
-    /* background-color: red; */
     height: 67vh;
 }
 .ug-list::-webkit-scrollbar{
@@ -389,7 +380,6 @@
     .main-container{
         height: 100vh;
         width: 100vw;
-        /* gap: 4px; */
     }
     .list-container{
         flex: 1;
