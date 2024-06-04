@@ -5,6 +5,7 @@ const Chat = require("../models/chatModel")
 
 const allMessages = expressAsyncHandler(async (req, res) => {
     try {
+        console.log("ALL MESSAGES HTI")
         const messages = await Message.find({ chat: req.params.chatId })
             .populate("sender", "name email")
             .populate("receiver")
