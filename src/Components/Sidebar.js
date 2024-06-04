@@ -165,7 +165,7 @@ function Sidebar() {
                                     {chatName}
                                 </p>
                                 <p className={"con-lastMessage"}>
-                                    {/* {chatName.latestMessage.content} */}
+                                    {conversation.latestMessage.content}
                                 </p>
                             </div>
                         )

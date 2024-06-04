@@ -150,8 +150,6 @@
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     width: 63vw;
     height: 70%;
-
-
 }
 .messages-container::-webkit-scrollbar{
     display: none;
@@ -421,5 +419,28 @@
     .signup-button{
         height: 25px;
         width: 80px;
+    }
+    .welcome-para{
+        font-size: 25px !important;
+    }
+    .welcome-container{
+        flex: 1;
+    }
+    .createGroups-container{
+        flex: 1;
+    }
+    
+}
+
+@media only screen and (max-width: 60em) and (min-width: 40em)
+{
+    .messages-container{
+        width: 40vw;
+    }
+    .chatArea-header{
+        width: 40vw;
+    }
+    .welcome-para{
+        font-size: 25px !important;
     }
 }

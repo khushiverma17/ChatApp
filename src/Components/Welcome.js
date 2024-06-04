@@ -28,7 +28,7 @@ function Welcome() {
                 alt="logo"
                 className="welcome-logo"></motion.img>
             <b>Hi, {userData.data.name} &#x1F44B;</b>
-            <p className="welcome-para">View and text directly to people present in chat rooms</p>
+            <p className="welcome-para"><center>View and text directly to people present in chat rooms</center></p>
 
         </div>
 

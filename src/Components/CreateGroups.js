@@ -59,7 +59,7 @@ function CreateGroups() {
 
     return (
         <>
-            <div style={{backgroundColor:"red"}}>
+            <div>
                 <Dialog
                     open={open}
                     onClose={handleClose}
@@ -93,7 +93,7 @@ function CreateGroups() {
             <div className={"createGroups-container" + (lightTheme ? "" : " dark")}>
                 <input
                     placeholder="Enter Group Name"
-                    className={"search-box" + (lightTheme ? "" : "dark")}
+                    className={"search-box " + (lightTheme ? "" : "dark")}
                     onChange={(e)=>{
                         setGroupName(e.target.value)
                     }}
