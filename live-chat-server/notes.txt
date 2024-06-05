@@ -1,0 +1,13 @@
+get function in express
+localhost:5000
+dotenv
+khushiverma1708
+CgkaegJfJOOEq8SD  ==>password of mongodb
+
+
+
+U7%23379yi  ==>password of database
+
+npm install jsonwebtoken
+
+bcryptjs for password encryption
