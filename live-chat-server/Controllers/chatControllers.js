@@ -7,7 +7,6 @@ const User = require("../models/userModel")
 const accessChat = asyncHandler(async (req, res) => {
     const { userId } = req.body;
     if (!userId) {
-        console.log("UserId param not sent with request")
         return res.sendStatus(400);
     }
     // Queries the Chat collection to find chats where isGroupChat is false and both the authenticated user (req.user._id) and the specified userId are participants.
@@ -88,7 +87,7 @@ const accessChat = asyncHandler(async (req, res) => {
 
 const fetchChats = asyncHandler(async (req, res) => {
     try {
-        console.log("Fetch Chats API: ", req);
+        // console.log("Fetch Chats API: ", req);
         Chat.find({ users: { $elemMatch: { $eq: req.user._id } } })
             .populate("users", "-password")
             .populate("groupAdmin", "-password")
@@ -124,7 +123,6 @@ const createGroupChat = asyncHandler(async (req, res) => {
         return res.status(400).send({ message: "Data is insufficient" })
     }
     var users = JSON.parse(req.body.users)
-    console.log("chatController/createGroups: ", req);
     users.push(req.user);
 
     try {

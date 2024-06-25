@@ -1,0 +1,19 @@
+PORT="<port to run the server>"
+
+MONGO_URI="<mongo uri>"
+
+JWT_SECRET="<jwt secret>"
+
+BASE_URL="<base url to run server>"
+
+HOST="<host to send mail>"
+
+SERVICE="<service to send mail>"
+
+EMAIL_PORT="<email port>"
+
+SECURE="<true or false>"
+
+USER= "<your gmail id>"
+
+PASS= "<your gmail id app password>"

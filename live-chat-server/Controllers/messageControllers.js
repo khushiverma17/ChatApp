@@ -5,7 +5,7 @@ const Chat = require("../models/chatModel")
 
 const allMessages = expressAsyncHandler(async (req, res) => {
     try {
-        console.log("ALL MESSAGES HTI")
+        // console.log("ALL MESSAGES HTI")
         const messages = await Message.find({ chat: req.params.chatId })
             .populate("sender", "name email")
             .populate("receiver")
@@ -19,9 +19,9 @@ const allMessages = expressAsyncHandler(async (req, res) => {
 
 const sendMessage = expressAsyncHandler(async (req, res) => {
     const { content, chatId } = req.body
-    console.log(req)
-    console.log("CONTENT IS ", content)
-    console.log("CHAT IS IS ", chatId)
+    // console.log(req)
+    // console.log("CONTENT IS ", content)
+    // console.log("CHAT IS IS ", chatId)
 
     if (!content || !chatId) {
         console.log("Invalid data passed into request")
@@ -32,11 +32,10 @@ const sendMessage = expressAsyncHandler(async (req, res) => {
         content: content,
         chat: chatId
     }
-    console.log("TYPE OF SENDER CONTEND AND CHT ", typeof (sender), typeof (content), typeof (chat))
     try {
         var message = await Message.create(newMessage)
 
-        console.log(message);
+        // console.log(message);
         message = await message.populate("sender", "name pic")
         message = await message.populate("chat")
         message = await message.populate("receiver")

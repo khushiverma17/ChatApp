@@ -2,7 +2,7 @@
     const bcrypt = require("bcryptjs");
 
 
-    const userModel=mongoose.Schema({
+    const userModel= new mongoose.Schema({
         name:{
             type:String,
             required:true,
@@ -15,6 +15,10 @@
             type:String,
             required:true,
         },
+        verified:{
+            type: Boolean,
+            default: false
+        }
 
     },
     {

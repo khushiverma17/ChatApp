@@ -25,19 +25,25 @@ function Sidebar() {
 
     const lightTheme = useSelector(state => state.themeKey);
     const {refresh, setRefresh} = useContext(myContext);
-    console.log("Context API : refresh", refresh);
+    // console.log("Context API : refresh", refresh);
     const [conversations, setConversations] = useState([]);
     // const userData = JSON.parse(localStorage.getItem("userData"))
     const userData = JSON.parse(sessionStorage.getItem("userData"))
     const nav = useNavigate();
-    if (!userData) {
-        console.log("User is not authenticated");
-        nav("/")
-    }
 
-    const user = userData.data;
     useEffect(() => {
-        console.log("Conversations:", conversations);
+        if (!userData) {
+            console.log("User is not authenticated");
+            nav("/")
+        }
+
+    },[userData, nav])
+
+    const user = userData? userData.data: null;
+    useEffect(() => {
+        if(user)
+        {
+            // console.log("Conversations:", conversations);
 
         const config = {
             headers: {
@@ -46,9 +52,9 @@ function Sidebar() {
         }
 
         axios.get("http://localhost:8080/chat", config).then((response) => {
-            console.log("Data refresh in sidebar", response.data)
+            // console.log("Data refresh in sidebar", response.data)
             setConversations(response.data);
-        })
+        })}
     }, [refresh])
 
 
@@ -105,7 +111,7 @@ function Sidebar() {
                 {conversations.map((conversation, index) => {
                     var chatName=""
                     if(conversation.isGroupChat){
-                        chatName=conversation.chatName
+                      chatName=conversation.chatName
                     }
                     else{
                         conversation.users.map((user)=>{
@@ -130,7 +136,7 @@ function Sidebar() {
                                     key={index}
                                     className="conversation-container"
                                     onClick={()=>{
-                                        console.log("CONVERSATION ID IS : ", conversation._id)
+                                        // console.log("CONVERSATION ID IS : ", conversation._id)
                                         navigate("chat/" + conversation._id + "&" + chatName)
                                     }}
                                 >

@@ -99,15 +99,10 @@ function Groups() {
                                     ).then((response) => {
                                         nav("/app/chat/" + response.data._id + "&" + response.data.chatName)
 
-                                        console.log("RESPONSE IS: ", response)
-                                        console.log("Hello")
-                                        // nav("/")
                                     }
                                     ).catch((error) => {
                                         console.log(error)
                                     })
-                                    console.log("Creating chat wight ", group.chatName)
-                                    // dispatch(refreshSidebarFun())
                                 }}
                             >
                                 <p className="con-icon">{group.chatName[0]}</p>

@@ -1,5 +1,4 @@
-import React from "react";
-// import people from "./people.png"
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import logo from "../Assets/logo.jpg"
 import { useNavigate } from "react-router-dom";
@@ -10,12 +9,21 @@ function Welcome() {
     const lightTheme = useSelector(state => state.themeKey);
     // const userData = JSON.parse(localStorage.getItem("userData"));
     const userData = JSON.parse(sessionStorage.getItem("userData"));
-    console.log(userData);
+    // console.log(userData);
     const nav = useNavigate();
-    if (!userData) {
-        console.log("User is not authenticated")
-        nav("/")
+    
+    useEffect(()=>{
+        if (!userData) {
+            console.log("User is not authenticated")
+            // nav("/")
+            nav("/user/:id/verify/:token");
+        }
+    },[userData, nav])
+
+    if(!userData){
+        return (<div>loading...</div>)
     }
+
 
 
 
@@ -27,8 +35,9 @@ function Welcome() {
                 src={logo}
                 alt="logo"
                 className="welcome-logo"></motion.img>
-            <b>Hi, {userData.data.name} &#x1F44B;</b>
-            <p className="welcome-para"><center>View and text directly to people present in chat rooms</center></p>
+            {/* <b>Hi, {userData.data.name} &#x1F44B;</b> */}
+            <b>Hi, {userData.name} &#x1F44B;</b>
+            <center><p className="welcome-para">View and text directly to people present in chat rooms</p></center>
 
         </div>
 

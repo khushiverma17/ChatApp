@@ -6,6 +6,7 @@ const {notFound, errorHandler} = require("./middleware/errormiddleware")
 const chatRoutes = require ("./Routes/chatRoutes")
 const messageRoutes = require("./Routes/messageRoutes")
 const userRoutes = require("./Routes/userRoutes")
+// const sendMail = require("./Controllers/sendMail");
 
 const app = express();
 
@@ -35,12 +36,18 @@ app.get("/", (req, res) => {
     res.send("API is running")
 })
 
+
 app.use("/user", userRoutes)
 app.use("/chat", chatRoutes)
 app.use("/message", messageRoutes)
 
-const PORT = process.env.PORT || 8080;
-const server = app.listen(8080, console.log("Server is running"));
+
+
+
+const PORT = parseInt(process.env.PORT) || 8080;
+const server = app.listen(PORT, () => {
+    console.log(`Server is running at port ${PORT}`)
+})
 const io=require("socket.io")(server, {
     cors: {
         origin: "*",

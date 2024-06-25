@@ -32,8 +32,8 @@ function Users() {
                 Authorization: `Bearer ${userData.data.token}`
             }
         }
-        axios.get("http://localhost:8080/user/fetchUsers", config).then((data) => {
-            console.log("User data from API", data)
+        const data = axios.get("http://localhost:8080/user/fetchUsers", config).then((data) => {
+            // console.log("User data from API", data)
             setUsers(data.data)
         })
     }, [refresh])
@@ -72,7 +72,7 @@ function Users() {
                                 className={"list-item" + ((lightTheme) ? "" : " dark")}
                                 key={index}
                                 onClick={() => {
-                                    console.log("Creating chat with ", user.name);  //THIS
+                                    // console.log("Creating chat with ", user.name);  //THIS
                                     const config = {
                                         headers: {
                                             Authorization: `Bearer ${userData.data.token}`
@@ -87,7 +87,7 @@ function Users() {
                                     )
                                         .then((response) => {
                                             // THIS IS THE SOLUTION BECAUSE IN THE APP.JS WE HAVE NESTED ROUTES CHAT/:ID ROUTE IS INSIDE APP ROUTE
-                                            console.log("USER ISER IS ", userData)
+                                            // console.log("USER ISER IS ", userData)
 
 
                                             //TASK IS TO SEND THE CORRECT ID HERE ONLY SO THAT IT GET DISPLAYED IN THE TOP OF CHATAREA
@@ -95,13 +95,10 @@ function Users() {
 
 
 
-                                            console.log("RESPONSE IS ", response);
-                                            console.log("success")
                                         }).catch((error) => {
                                             console.log(error)
                                         })
                                     dispatch(refreshSidebarFun());
-                                    console.log("after")
                                 }}
                             >
                                 <p className="con-icon">{user.name[0]}</p>

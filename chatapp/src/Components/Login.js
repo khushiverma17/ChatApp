@@ -9,11 +9,12 @@ import Toaster from "./Toaster"
 function Login() {
 
     const [showLogin, setShowLogin] = useState(true);
-    const [data, setData] = useState({ name: "", email: "", password: "" });
+    const [data, setData] = useState({ name: "", email: "", password: "", verified: "false" });
     const [loading, setLoading] = useState(false);
 
     const [logInStatus, setLogInStatus] = useState("");
     const [signInStatus, setSignInStatus] = useState("");
+    const [msg, setMsg] = useState("An email")
 
     const navigate = useNavigate();
 
@@ -23,27 +24,27 @@ function Login() {
 
     const loginHandler = async (e) => {
         setLoading(true);
-        console.log(data);
+        // console.log("data is ", data);
         try {
             const config = {
                 headers: {
                     "Content-type": "application/json"
                 }
             };
+
             const response = await axios.post(
                 "http://localhost:8080/user/login",
                 data,
                 config
             );
-            console.log("Login ", response);
+            setMsg(response.msg)
             setLogInStatus({ msg: "Success", key: Math.random() });
             setLoading(false);
 
-            console.log(Date.now())
             // localStorage.setItem("userData", JSON.stringify(response));
             sessionStorage.setItem("userData", JSON.stringify(response));
             navigate("/app/welcome")
-            
+
         }
         catch (error) {
             setLogInStatus({
@@ -53,8 +54,9 @@ function Login() {
         }
         setLoading(false)
     }
-    
+
     const signUpHandler = async () => {
+
         setLoading(true);
         try {
             const config = {
@@ -67,12 +69,11 @@ function Login() {
                 data,
                 config
             );
-            console.log(response);
+            setMsg(response.data.message)
             setSignInStatus({ msg: "Success", key: Math.random() });
-            navigate("/app/welcome");
-
-            console.log(Date.now())
-            // localStorage.setItem("userData", JSON.stringify(response));
+            await loginHandler()
+            // navigate("/app/welcome");
+            
             sessionStorage.setItem("userData", JSON.stringify(response));
             setLoading(false);
         }
@@ -161,6 +162,10 @@ function Login() {
                                 Sign Up
                             </span>
                         </p>
+                        {logInStatus ? (
+                            // <div className="">{msg}</div>
+                            <Toaster key={Math.random()} message={msg} />
+                        ) : <div>hello login</div>}
 
                         {logInStatus ? (
                             <Toaster key={logInStatus.key} message={logInStatus.msg} />
@@ -228,8 +233,12 @@ function Login() {
                             >Log in</span>
                         </p>
                         {signInStatus ? (
+                            // <div>{msg}</div>
+                            <Toaster key={Math.random()} message={msg}></Toaster>
+                        ) : <div>hello again</div>}
+                        {/* {signInStatus ? (
                             <Toaster key={signInStatus.key} message={signInStatus.msg}></Toaster>
-                        ) : null}
+                        ) : null} */}
                     </div>
                 )}
 

@@ -21,7 +21,7 @@ function ChatArea() {
     const messagesEndRef = useRef(null);
     const dyParams = useParams();
     const [chat_id, chat_user] = dyParams._id.split("&")
-    console.log("chart id and user id is ", chat_id, chat_user)
+    // console.log("chart id and user id is ", chat_id, chat_user)
     // const userData = JSON.parse(localStorage.getItem("userData"))
     const userData = JSON.parse(sessionStorage.getItem("userData"))
     const [allMessages, setAllMessages] = useState([])
@@ -56,7 +56,7 @@ function ChatArea() {
                 // socket.emit("newMessage", data);    //remove
             })
             .catch(error => {
-                console.log("ERROR IS CHAT ARESA ; ", error)
+                console.log("ERROR IN CHAT AREA IS  ", error)
             })
         socket.emit("newMessage", data)
     }
@@ -80,7 +80,7 @@ function ChatArea() {
     })
 
     useEffect(() => {
-        console.log("Users refreshed");
+        // console.log("Users refreshed");
         const config = {
             headers: {
                 Authorization: `Bearer ${userData.data.token}`,

@@ -8,7 +8,10 @@ import Users from './Components/Users'
 import Groups from './Components/Groups';
 import CreateGroups from './Components/CreateGroups';
 import {useDispatch, useSelector } from "react-redux";
+import EmailVerify from './Components/EmailVerify';
+import ClickVerify from './Components/ClickVerify';
 function App() {
+  console.log("rednerin app");
   const dispatch= useDispatch();
   const lightTheme=useSelector(state=>state.themeKey);
   return (
@@ -18,6 +21,8 @@ function App() {
       {/* <Login/> */}
       <Routes>
         <Route path="/" element={<Login/>}/>
+        <Route path="/user/:id/verify/:token" element={<EmailVerify/>}></Route>
+        <Route path="/click-verify/:id/verify/:token" element={<ClickVerify/>}></Route>
         <Route path="app" element={<MainContainer/>}>
           <Route path="welcome" element={<Welcome/>}></Route>
           <Route path="chat/:_id" element={<ChatArea/>}></Route>
